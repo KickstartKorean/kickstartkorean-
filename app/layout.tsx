@@ -1,20 +1,21 @@
+import type { Metadata } from "next";
 import "./globals.css";
-import { Inter } from "next/font/google";
 
-const inter = Inter({ subsets: ["latin"] });
-
-// app/layout.tsx
+export const metadata: Metadata = {
+  title: "KickstartKorean",
+  description: "Learn Korean effectively",
+};
 
 export default async function RootLayout(props: {
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
 }) {
   const params = await props.params;
-  const locale = params.locale;
+  const locale = params.locale || "en";
 
   return (
     <html lang={locale}>
-      <body>
+      <body className="antialiased">
         {props.children}
       </body>
     </html>
