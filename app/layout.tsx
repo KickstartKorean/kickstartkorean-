@@ -3,16 +3,20 @@ import { Inter } from "next/font/google";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function RootLayout({
-  children,
-  params: { locale }
-}: {
+// app/layout.tsx
+
+export default async function RootLayout(props: {
   children: React.ReactNode;
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }) {
+  const params = await props.params;
+  const locale = params.locale;
+
   return (
     <html lang={locale}>
-      <body className={inter.className}>{children}</body>
+      <body>
+        {props.children}
+      </body>
     </html>
   );
 }
